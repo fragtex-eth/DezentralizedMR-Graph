@@ -1,0 +1,29 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: MRFactory
+    network: goerli
+    source:
+      address: "0xfFf8cDD93306b03B2f335E29E37f9BB35Ea9a656"
+      abi: MRFactory
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - SurveyCreated
+        - SurveyEntersReviewStage
+        - SurveyFinished
+      abis:
+        - name: MRFactory
+          file: ./abis/MRFactory.json
+      eventHandlers:
+        - event: SurveyCreated(address,string[],string,uint256,uint256,uint256)
+          handler: handleSurveyCreated
+        - event: SurveyEntersReviewStage(address)
+          handler: handleSurveyEntersReviewStage
+        - event: SurveyFinished(address)
+          handler: handleSurveyFinished
+      file: ./src/mr-factory.ts

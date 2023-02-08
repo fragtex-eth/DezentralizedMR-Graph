@@ -1,0 +1,6 @@
+type ExampleEntity @entity {
+  id: ID!
+  count: BigInt!
+  survey: Bytes! # address
+  questions: [String]! # string[]
+}
